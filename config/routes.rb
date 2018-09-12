@@ -1,15 +1,15 @@
 Rails.application.routes.draw do
   namespace :site do
-  get 'home/index'
+    get 'home', to: 'home#index'
   end
 
   namespace :backoffice do
-  get 'dashboard/index'
+    get 'dashboard', to: 'dashboard#index'
   end
 
   devise_for :admins
   devise_for :members
-  get 'home/index'
+
   root 'site/home#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
