@@ -2,11 +2,12 @@ class Backoffice::AdminsController < BackofficeController
   before_action :set_admin, only: [:edit, :update, :destroy]
 
   def index
-    @admin = Admin.all
+    @admins = Admin.all
   end
 
   def new
     @admin = Admin.new
+    authorize @admin
   end
 
   def create
@@ -52,6 +53,6 @@ class Backoffice::AdminsController < BackofficeController
   end
 
   def params_admin
-    params.require(:admin).permit(:email, :password, :password_confirmation)
+    params.require(:admin).permit(:name, :email, :password, :password_confirmation)
   end
 end

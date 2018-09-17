@@ -2,8 +2,10 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     Lista de Administradores
-    <%= link_to new_backoffice_admin_path, class: "btn btn-primary btn-circle pull-right", style: 'margin-top: -5px;', title: 'Novo' do %>
-      <i class="fa fa-plus"></i>
+    <% if policy(@admins).new? %>
+      <%= link_to new_backoffice_admin_path, class: "btn btn-primary btn-circle pull-right", style: 'margin-top: -5px;', title: 'Novo' do %>
+        <i class="fa fa-plus"></i>
+      <% end %>
     <% end %>
   </div>
   <!-- /.panel-heading -->
@@ -13,21 +15,26 @@
         <thead>
         <tr>
           <th>#</th>
+          <th>Nome</th>
           <th>E-mail</th>
+          <th>Tipo de acesso</th>
           <th style="width: 8%">Ações</th>
         </tr>
         </thead>
         <tbody>
-        <% @admin.each do |admin| %>
+        <% @admins.each do |admin| %>
           <tr>
             <td><%= admin.id %></td>
+            <td><%= admin.name %></td>
             <td><%= admin.email %></td>
+            <td><%= admin.role_i18n %></td>
             <td style="text-align: center;">
               <%= link_to edit_backoffice_admin_path(admin.id), class: "btn btn-primary btn-circle", title: 'Editar' do %>
                 <i class="fa fa-edit"></i>
               <% end %>
-              <% if current_admin != @admin.id %>
-                <%= link_to backoffice_admin_path(admin.id), method: :delete, class: "btn btn-danger btn-circle", title: 'Editar', data: {confirm: "Deseja realmente excluir o admin #{admin.email}?"} do %>
+              <% if current_admin != admin %>
+                <%= link_to backoffice_admin_path(admin.id), method: :delete, class: "btn btn-danger btn-circle", title: 'Editar',
+                            data: {confirm: t('messages.confirm_with', item: admin.name)} do %>
                   <i class="fa fa-remove"></i>
                 <% end %>
               <% end %>

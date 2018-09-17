@@ -18,6 +18,6 @@ puts "Cadastrando categorias...OK"
 
 puts "Cadastrando a administrador padrão..."
 
-Admin.create!(email: "fbmanhani@gmail.com", password: "123456", password_confirmation: "123456")
+Admin.create!(name: "Felipe B. Manhani", email: "fbmanhani@gmail.com", password: "123456", password_confirmation: "123456", role: 0)
 
 puts "Cadastrando a administrador padrão...OK"
